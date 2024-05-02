@@ -21,7 +21,7 @@ class NameLineCountRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $lines = explode(" ", $value);
+        $lines = explode(PHP_EOL, $value);
 
         if (count($lines) > $this->maxLines) {
             $fail("The $attribute must be limited to $this->maxLines lines.");
