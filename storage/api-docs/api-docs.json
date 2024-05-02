@@ -1,0 +1,510 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My First API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authorization",
+                "operationId": "2e9c317eea06b322356cd346eb0e29fb",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthLoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ViewAuthResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registration",
+                "operationId": "7d8c5938c0f8c4cee857ce8e9a12d028",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ViewAuthResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": []
+            }
+        },
+        "/api/haikus": {
+            "get": {
+                "tags": [
+                    "Haikus"
+                ],
+                "summary": "Haiku list",
+                "description": "Class IndexController",
+                "operationId": "c06486f60cc3deaa2af30b9d302c8b48",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/IndexHaikuResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Haikus"
+                ],
+                "summary": "Create a new haiku",
+                "description": "Class CreateController",
+                "operationId": "createHaiku",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HaikuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ViewHaikuResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/haikus/{id}": {
+            "get": {
+                "tags": [
+                    "Haikus"
+                ],
+                "summary": "View haiku",
+                "description": "Class ViewController",
+                "operationId": "b6666d3cbc87e5701eaa24a7438cf75f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ViewHaikuResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Haikus"
+                ],
+                "summary": "Update haiku",
+                "description": "Class UpdateController",
+                "operationId": "c9c89381cd528b98f4f98b3459cb1850",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HaikuRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ViewHaikuResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Haikus"
+                ],
+                "summary": "Delete haiku",
+                "description": "Class DeleteController",
+                "operationId": "d4fe84ac28f65b64675a66fa5bea821d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "422": {
+                        "description": "Error validation"
+                    },
+                    "500": {
+                        "description": "Error server"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AuthLoginRequest": {
+                "required": [
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "Class LoginRequest",
+                        "type": "string",
+                        "format": "email",
+                        "example": "test@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "000000"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthRegisterRequest": {
+                "required": [
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "Class RegisterRequest",
+                        "type": "string",
+                        "format": "email",
+                        "example": "test@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "000000"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "example": "000000"
+                    }
+                },
+                "type": "object"
+            },
+            "HaikuRequest": {
+                "title": "HaikuRequest",
+                "required": [
+                    "name",
+                    "subject"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Class HaikuRequest",
+                        "type": "strig",
+                        "example": "test"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "format": "date",
+                        "enum": [
+                            "weather",
+                            "autumn",
+                            "lyrics",
+                            "music"
+                        ]
+                    },
+                    "published": {
+                        "type": "null|boolean",
+                        "example": "null|true"
+                    },
+                    "publication_date": {
+                        "type": "null|string",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "ViewAuthResource": {
+                "properties": {
+                    "token": {
+                        "description": "Class ViewAuthResource",
+                        "type": "string",
+                        "example": "1|Bjb2QGYzxKgqRFLbnHxeUkqR6drD7TpeF7Va3mgU"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/ViewAuthResource"
+                    }
+                },
+                "type": "object"
+            },
+            "IndexHaikuResource": {
+                "properties": {
+                    "id": {
+                        "description": "Class IndexHaikuResource",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "strig",
+                        "example": "test"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "format": "date",
+                        "enum": [
+                            "weather",
+                            "autumn",
+                            "lyrics",
+                            "music"
+                        ]
+                    },
+                    "published": {
+                        "type": "null|boolean",
+                        "example": "null|true"
+                    },
+                    "publication_date": {
+                        "type": "null|string",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "ViewHaikuResource": {
+                "properties": {
+                    "id": {
+                        "description": "Class ViewHaikuResource",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "user_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "name": {
+                        "type": "strig",
+                        "example": "test"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "format": "date",
+                        "enum": [
+                            "weather",
+                            "autumn",
+                            "lyrics",
+                            "music"
+                        ]
+                    },
+                    "published": {
+                        "type": "null|boolean",
+                        "example": "null|true"
+                    },
+                    "publication_date": {
+                        "type": "null|string",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-12-19T19:47:23.000000Z"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
